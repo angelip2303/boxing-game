@@ -1,0 +1,9 @@
+## System and generated files
+.idea
+.DS_Store
+
+## Directories
+log/
+dist/
+node_modules/
+bower_components/
