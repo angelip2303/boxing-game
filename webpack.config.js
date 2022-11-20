@@ -1,7 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: "./src/index.js",
   resolve: {
     modules: ["src", "node_modules"],
     extensions: [".ts", ".tsx", ".js", ".jsx"],
@@ -11,7 +10,7 @@ module.exports = {
     rules: [
       // --*-- BABEL --*--
       {
-        test: /\.jsx?$/,
+        test: /\.js$/,
         exclude: /node_modules/,
         use: ["babel-loader"],
       },

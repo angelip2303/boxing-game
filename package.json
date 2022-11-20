@@ -29,5 +29,9 @@
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.9.3",
     "webpack-merge": "^5.8.0"
+  },
+  "dependencies": {
+    "ml5": "^0.12.2",
+    "p5": "^1.5.0"
   }
 }

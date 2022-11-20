@@ -1,6 +1,6 @@
-class Player {
+export default class Player {
   constructor() {
-    this.video = createCapture(VIDEO);
+    this.video = p5.createCapture(p5.VIDEO);
     this.poseNet = ml5.poseNet(this.video); // poses of the player
     // This sets up an event that fills the global variable "poses"
     // with an array every time new poses are detected
@@ -9,9 +9,14 @@ class Player {
   }
 
   draw() {
-    image(this.video, 0, 0, width, height); // show the image :D
+    this.#drawCamera(); // draw the camera :D
     this.#drawKeypoints(); // show the keypoints :D
     this.#drawSkeleton(); // draw the skeleton :D
+  }
+
+  #drawCamera() {
+    // Draw the video element into the canvas
+    p5.image(this.video, 0, 0, p5.windowWidth, p5.windowHeight);
   }
 
   // A function to draw ellipses over the detected keypoints
@@ -25,9 +30,9 @@ class Player {
         pose.keypoints.forEach((keypoint) => {
           // Draw an ellipse if the pose probability is higher than 0.2
           if (keypoint.score > 0.2) {
-            fill(255, 0, 0);
-            noStroke();
-            ellipse(keypoint.position.x, keypoint.position.y, 10, 10);
+            p5.fill(255, 0, 0);
+            p5.noStroke();
+            p5.ellipse(keypoint.position.x, keypoint.position.y, 10, 10);
           }
         });
     });
@@ -44,8 +49,8 @@ class Player {
         pose.skeleton.forEach((skeleton) => {
           let partA = skeleton[0];
           let partB = skeleton[1];
-          stroke(255, 0, 0);
-          line(
+          p5.stroke(255, 0, 0);
+          p5.line(
             partA.position.x,
             partA.position.y,
             partB.position.x,
