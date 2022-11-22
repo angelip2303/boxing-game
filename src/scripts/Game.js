@@ -2,6 +2,7 @@ import AIPlayer from "./AIPlayer";
 import HumanPlayer from "./HumanPlayer";
 
 export default class Game {
+  // TODO: create the play loop and check game over
   constructor() {
     // TODO: create a MENU where the user can select how to play
     //We create two player for us to start the combat
