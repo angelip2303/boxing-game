@@ -16,16 +16,20 @@ export default class Player {
     this.height = height; // height of the camera
     this.health = 100; // health of the user; starts at 100%
     this.ui = new UI(x, y, width, this.health);
-    this.video = undefined;
-    // We start the ml5 poseNet
+  }
+
+  modelReady() {
+    // We set a callback when the model is loaded
     // ======================================
-    this.poseNet = ml5.poseNet(this.video, { detectionType: "single" }); // poses of the player
-    //Every time new poses are detected ==> update the pose
-    this.poseNet.on("pose", (results) => this.#updatePose(results));
+    this.poseNet = ml5.poseNet(this.media);
+    this.poseNet.on("pose", (poses) => {
+      this.#updatePose(poses);
+    });
   }
 
   draw() {
     this.#drawCamera(); // draw the camera :D
+    this.#drawBodyParts(); // draw the detected body parts
     this.ui.draw(); // draw the User Interface
   }
 
@@ -34,12 +38,38 @@ export default class Player {
   }
 
   #drawCamera() {
-    if (this.video == undefined) return;
+    if (this.media == undefined) return;
     // In case the video is defined: draw the element into the canvas
-    p5.image(this.video, this.x, this.y, this.width, this.height);
+    p5.image(this.media, this.x, this.y, this.width, this.height);
   }
 
-  #updatePose(results) {
-    if (results != undefined) this.pose = new Pose(results[0].pose);
+  #drawBodyParts() {
+    if (this.pose == undefined) return;
+    // In case any pose has been detected: draw it!
+    let damage = this.pose.damage;
+    let wrists = this.pose.wrists;
+    for (let key in damage) {
+      let bodyPart = damage[key];
+      if (bodyPart != undefined)
+        this.#drawPoint(bodyPart.x, bodyPart.y, "#FFFFFF");
+    }
+    for (let key in wrists) {
+      let bodyPart = wrists[key];
+      if (bodyPart != undefined)
+        this.#drawPoint(bodyPart.x, bodyPart.y, "#FF0000");
+    }
+  }
+
+  #drawPoint(x, y, color) {
+    p5.fill(color);
+    p5.noStroke();
+    p5.ellipse(x, y, 10, 10);
+  }
+
+  #updatePose(poses) {
+    if (poses[0] != undefined) {
+      // we retrieve the first pose from the results
+      this.pose = new Pose(poses[0].pose);
+    }
   }
 }
