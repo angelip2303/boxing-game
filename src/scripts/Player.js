@@ -9,6 +9,8 @@ export default class Player {
     this.width = width; // width of the camera
     this.height = height; // height of the camera
     this.video = p5.createCapture(video); // we capture the webcam
+    this.video.size(width, height); // we fit the video to the width and height
+    this.video.hide(); // hide the video element, only show the canvas
     this.health = 100; // health of the user; starts at 100%
     this.ui = new UI(x, y, width, this.health);
     // We start the ml5 poseNet
@@ -17,7 +19,6 @@ export default class Player {
     // This sets up an event that fills the global variable "poses"
     // with an array every time new poses are detected
     this.poseNet.on("pose", (results) => (this.poses = results));
-    this.video.hide(); // hide the video element, only show the canvas
   }
 
   draw() {
@@ -36,14 +37,16 @@ export default class Player {
   #drawKeypoints() {
     if (this.poses == undefined) return;
     // Loop through all the poses detected
-    this.poses.forEach((pose) => {
+    this.poses.forEach((aux) => {
       // Loop through all the keypoints of the given pose
+      let pose = aux.pose;
+      console.log(pose);
       if (pose.keypoints != undefined)
         // in case some keyponts have been detected
         pose.keypoints.forEach((keypoint) => {
           // Draw an ellipse if the pose probability is higher than 0.2
           if (keypoint.score > 0.2) {
-            p5.fill(255, 0, 0);
+            p5.fill(255, 255, 0);
             p5.noStroke();
             p5.ellipse(keypoint.position.x, keypoint.position.y, 10, 10);
           }
