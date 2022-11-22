@@ -16,6 +16,7 @@ const sketch = (p5) => {
   // Setup function
   // ======================================
   p5.setup = () => {
+    p5.background(0, 0, 0, 0);
     p5.createCanvas(p5.windowWidth, p5.windowHeight);
     game = new Game();
   };
@@ -24,6 +25,7 @@ const sketch = (p5) => {
   // ======================================
   p5.draw = () => {
     game.show();
+    game.fight();
   };
 
   // Resize the canvas on window resize function
