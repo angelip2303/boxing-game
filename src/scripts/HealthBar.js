@@ -11,20 +11,16 @@ export default class UI {
     this.health = health; // health value
   }
 
-  draw() {
+  draw(health) {
+    if (health < 0) return;
     // Outer border
     p5.stroke(0);
     p5.strokeWeight(4);
     p5.noFill();
     p5.rect(this.x, this.y, this.width, this.height);
-    // Inner health bar
+    // Inner (health) bar
     p5.noStroke();
     p5.fill(255, 0, 0); // fill RED
-    p5.rect(
-      this.x,
-      this.y,
-      p5.map(this.health, 0, 100, 0, this.width),
-      this.height
-    );
+    p5.rect(this.x, this.y, p5.map(health, 0, 100, 0, this.width), this.height);
   }
 }

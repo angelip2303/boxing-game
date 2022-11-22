@@ -28,7 +28,7 @@ const sketch = (p5) => {
     game.fight();
   };
 
-  // Resize the canvas on window resize function
+  // Resize the canvas on window resize function TODO: fix the resizing
   // ======================================
   p5.windowResized = () => {
     p5.resizeCanvas(p5.windowWidth, p5.windowHeight);

@@ -3,7 +3,7 @@
  *
  * @class Player
  */
-import UI from "./UI";
+import HealthBar from "./HealthBar";
 import Pose from "./Pose";
 
 export default class Player {
@@ -15,26 +15,28 @@ export default class Player {
     this.width = width; // width of the camera
     this.height = height; // height of the camera
     this.health = 100; // health of the user; starts at 100%
-    this.ui = new UI(x, y, width, this.health);
-  }
-
-  modelReady() {
-    // We set a callback when the model is loaded
-    // ======================================
-    this.poseNet = ml5.poseNet(this.media);
-    this.poseNet.on("pose", (poses) => {
-      this.#updatePose(poses);
-    });
+    this.healthBar = new HealthBar(x, y, width);
   }
 
   draw() {
     this.#drawCamera(); // draw the camera :D
     this.#drawBodyParts(); // draw the detected body parts
-    this.ui.draw(); // draw the User Interface
+    this.healthBar.draw(this.health); // draw the User Interface
   }
 
-  takeDamage(dmg) {
-    this.health -= dmg;
+  updatePose(poses) {
+    if (poses[0] != undefined) {
+      // we retrieve the first pose from the results
+      this.pose = new Pose(poses[0].pose);
+    }
+  }
+
+  receiveDamage(damage) {
+    if (this.health - damage < 0) {
+      this.health = 0; // we set the minimum possible value :D
+      return;
+    }
+    this.health -= damage; // we subtract the damage received
   }
 
   #drawCamera() {
@@ -46,10 +48,10 @@ export default class Player {
   #drawBodyParts() {
     if (this.pose == undefined) return;
     // In case any pose has been detected: draw it!
-    let damage = this.pose.damage;
+    let body = this.pose.body;
     let wrists = this.pose.wrists;
-    for (let key in damage) {
-      let bodyPart = damage[key];
+    for (let key in body) {
+      let bodyPart = body[key];
       if (bodyPart != undefined)
         this.#drawPoint(bodyPart.x, bodyPart.y, "#FFFFFF");
     }
@@ -63,13 +65,6 @@ export default class Player {
   #drawPoint(x, y, color) {
     p5.fill(color);
     p5.noStroke();
-    p5.ellipse(x, y, 10, 10);
-  }
-
-  #updatePose(poses) {
-    if (poses[0] != undefined) {
-      // we retrieve the first pose from the results
-      this.pose = new Pose(poses[0].pose);
-    }
+    p5.ellipse(this.x + x, this.y + y, 10, 10);
   }
 }

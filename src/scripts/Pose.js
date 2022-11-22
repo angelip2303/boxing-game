@@ -6,7 +6,7 @@ export default class Pose {
       right: this.#checkConfidence(pose.rightWrist),
     };
     // Parts of the body of the player that can be damaged
-    this.damage = {
+    this.body = {
       nose: this.#checkConfidence(pose.nose),
       leftEye: this.#checkConfidence(pose.leftEye),
       rightEye: this.#checkConfidence(pose.rightEye),
