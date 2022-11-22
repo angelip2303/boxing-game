@@ -26,7 +26,7 @@ const sketch = (p5) => {
     game.show();
   };
 
-  // Draw function
+  // Resize the canvas on window resize function
   // ======================================
   p5.windowResized = () => {
     p5.resizeCanvas(p5.windowWidth, p5.windowHeight);
