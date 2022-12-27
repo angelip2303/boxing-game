@@ -31,7 +31,7 @@ export default class Game {
     if (this.player2 == undefined || this.player2.pose == undefined) return;
     // In case some pose has been detected: check :D
     this.#isPunch(this.player1, this.player2);
-    // this.#isPunch(this.player2, this.player1);
+    // this.#isPunch(this.player2, this.player1); TODO: make AI not to fight
   }
 
   #isPunch(wristPlayer, bodyPlayer) {
