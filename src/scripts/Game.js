@@ -59,7 +59,7 @@ export default class Game {
     // we consider that it has been impacted given a certain threshold
     return (
       this.#isImpactWithPrecision(wrist.x, bodyPart.x, 100) &&
-      this.#isImpactWithPrecision(wrist.y, bodyPart.y, 100) // TODO: parameterize precision
+      this.#isImpactWithPrecision(wrist.y, bodyPart.y, 100) // TODO: parameterize precision and rename
     );
   }
 

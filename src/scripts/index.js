@@ -32,7 +32,7 @@ const sketch = (p5) => {
   // Resize the canvas on window resize function TODO: fix the resizing
   // ======================================
   p5.windowResized = () => {
-    p5.resizeCanvas(p5.windowWidth, p5.windowHeight);
+    p5.resizeCanvas(window.innerWidth, window.innerHeight);
   };
 };
 
