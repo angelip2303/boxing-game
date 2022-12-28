@@ -24,6 +24,14 @@ export default class Player {
     this.healthBar.draw(this.health); // draw the User Interface
   }
 
+  setHealth(arg){
+    this.health = arg;
+  }
+
+  getHealth(){
+    return this.health;
+  }
+
   updatePose(poses) {
     if (poses[0] != undefined) {
       // we retrieve the first pose from the results

@@ -3,7 +3,7 @@ import HumanPlayer from "./HumanPlayer";
 
 export default class Game {
   // TODO: create the play loop and check game over
-  constructor() {
+  constructor(state) {
     // TODO: create a MENU where the user can select how to play
     //We create two player for us to start the combat
     this.player1 = new HumanPlayer(
@@ -19,6 +19,22 @@ export default class Game {
       p5.windowWidth / 2,
       p5.windowHeight
     ); // rightPlayer
+
+    if(state !== undefined){
+      if(state.health1 !== undefined){
+        this.player1.setHealth(state.health1);
+      }
+      if(state.health2 !== undefined){
+        this.player2.setHealth(state.health2);
+      }
+    }
+  }
+
+  getState(){
+    return {
+      health1: this.player1.getHealth(),
+      health2: this.player2.getHealth()
+    }
   }
 
   show() {
