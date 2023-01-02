@@ -6,7 +6,7 @@ This is required for an optimal performance of the application; as we are using 
 
 1. Go to the settings of your browser
 2. Search for **Use hardware acceleration when available**
-3. Enable that function
+3. Enable it
 
 ## Setup
 
