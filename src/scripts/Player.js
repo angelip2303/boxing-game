@@ -16,6 +16,7 @@ export default class Player {
     this.height = height; // height of the camera
     this.health = 100; // health of the user; starts at 100%
     this.healthBar = new HealthBar(x, y, width);
+    this.time = Date.now();
   }
 
   draw() {
@@ -40,12 +41,17 @@ export default class Player {
   }
 
   receiveDamage(damage) {
-    if (this.health - damage < 0) {
-      this.health = 0; // we set the minimum possible value :D
-      return;
+    if(Date.now() - this.time > 1000){ //Stall of one second
+      if (this.health - damage < 0) {
+        this.health = 0; // we set the minimum possible value :D
+        return;
+      }
+      this.health -= damage; // we subtract the damage received
+      this.time = Date.now();
     }
-    this.health -= damage; // we subtract the damage received
   }
+
+  
 
   #drawCamera() {
     if (this.media == undefined) return;

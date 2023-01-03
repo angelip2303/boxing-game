@@ -57,8 +57,12 @@ export default class Game {
     // For each body part of the player that receives damage, we have to check
     // if any impact has been received. If true, we apply some damage to the
     // player that has received a punch
-    for (let key in body)
-      if (this.#isImpact(wrists, body[key])) bodyPlayer.receiveDamage(10); // TODO: parameterize
+    
+    for (let key in body){
+      if (this.#isImpact(wrists, body[key]) ) {
+        bodyPlayer.receiveDamage(10); 
+      }
+    }
   }
 
   #isImpact(wrists, bodyPart) {
