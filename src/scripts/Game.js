@@ -77,9 +77,8 @@ export default class Game {
     if (bodyPart == undefined) return false;
     // In case a wrist has been detected || a body part ==> check if is impact
     // we consider that it has been impacted given a certain threshold
-    return (
-      this.#isImpactWithPrecision(wrist, bodyPart, 200)  // TODO: parameterize precision and rename
-    );
+    return this.#isImpactWithPrecision(wrist, bodyPart, 200);  
+    
   }
 
   #isImpactWithPrecision(wrist, body, radius) {
