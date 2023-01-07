@@ -41,14 +41,14 @@ export default class Player {
   }
 
   receiveDamage(damage) {
-    if(Date.now() - this.time > 1000){ //Stall of one second
-      if (this.health - damage < 0) {
-        this.health = 0; // we set the minimum possible value :D
-        return;
-      }
-      this.health -= damage; // we subtract the damage received
-      this.time = Date.now();
+    if(Date.now() - this.time < 1000) return; //Stall of one second
+
+    if (this.health - damage < 0) {
+      this.health = 0; // we set the minimum possible value :D
+      return;
     }
+    this.health -= damage; // we subtract the damage received
+    this.time = Date.now();
   }
 
   
