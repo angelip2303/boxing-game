@@ -12,28 +12,22 @@ This is required for an optimal performance of the application; as we are using 
 2. Search for **Use hardware acceleration when available**
 3. Enable it
 
-## Usage
+## 🕹️ Usage
 
-## Setup
+To play this simple game you just have to enable the usage of the camera for it to be used and a simple UI will be displayed showing the human-player on the left, while the IA is on the right. Notice how the system detects the wrists (parts of the body that can cause damage) highlighted in red, as well as the nose and eyes (parts of the body that may take damage) highlighted in white. Then, if a red-part of the body of a player hits a white-part of the other player, the latter receives some damage. The game is over when the health of any of the players is 0: the one who manages to survive wins!
 
-Install dependencies
+## 💾 Setup
+
+Install the required dependencies by running in the scope of the `package.json` file
 
 ```sh
 $ npm install
 ```
 
-## Development
+## 💻 Development
 
 Run the local webpack-dev-server with livereload and autocompile on [http://localhost:4000/](http://localhost:4000/)
 
 ```sh
 $ npm run start
-```
-
-## Deployment
-
-Build the current application
-
-```sh
-$ npm run build
 ```
