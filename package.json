@@ -4,11 +4,12 @@
   "description": "",
   "main": "./src/scripts/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --progress --config webpack.config.dev.js",
-    "build": "webpack -p --progress --config webpack.config.build.js"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
+    "build": "webpack serve --config webpack.config.build.js --stats-error-details"
   },
-  "author": "Ángel Iglesias Préstamo",
+  "author": "Ángel Iglesias Préstamo and Diego Martín Fernández",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.18.9",
