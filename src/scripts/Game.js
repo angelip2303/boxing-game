@@ -52,7 +52,11 @@ export default class Game {
     p5.textSize(50);
     p5.textAlign(p5.CENTER, p5.CENTER);
     p5.fill(255, 255, 255);
-    p5.text("Game Over!", p5.windowWidth / 2, p5.windowHeight / 2);
+    p5.text(
+      `Game Over... ${this.player1.health === 0 ? "Computer" : "You"} won!`,
+      p5.windowWidth / 2,
+      p5.windowHeight / 2
+    );
   }
 
   #fight() {
