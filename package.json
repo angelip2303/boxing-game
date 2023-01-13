@@ -4,10 +4,7 @@
   "description": "",
   "main": "./src/scripts/index.js",
   "scripts": {
-    "start": "webpack-dev-server --progress --config webpack.config.dev.js",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
-    "build": "webpack --config webpack.config.build.js "
+    "start": "webpack-dev-server --progress --config webpack.config.dev.js"
   },
   "author": "Ángel Iglesias Préstamo and Diego Martín Fernández",
   "license": "ISC",
