@@ -25,20 +25,17 @@ const sketch = (p5) => {
   // Draw function
   // ======================================
   p5.draw = () => {
-    game.show();
-    game.fight();
+    game.loop(); // play the game
   };
 
-  // Resize the canvas on window resize function TODO: fix the resizing
+  // Resize the canvas on window resize function
   // ======================================
   p5.windowResized = () => {
-    //p5.resizeCanvas(window.innerWidth, window.innerHeight);
-    let state = game.getState();
     p5.background(0, 0, 0, 0);
     p5.frameRate(30);
     p5.createCanvas(p5.windowWidth, p5.windowHeight);
+    let state = game.getState();
     game = new Game(state);
-    
   };
 };
 

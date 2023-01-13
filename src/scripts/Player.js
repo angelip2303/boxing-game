@@ -7,30 +7,23 @@ import HealthBar from "./HealthBar";
 import Pose from "./Pose";
 
 export default class Player {
-  constructor(x, y, width, height) {
+  constructor(x, y, width, height, health) {
     // We set the attributes of this class for later use
     // ======================================
     this.x = x; // x-position of the camera
     this.y = y; // y-position of the camera
     this.width = width; // width of the camera
     this.height = height; // height of the camera
-    this.health = 100; // health of the user; starts at 100%
+    this.health = health;
     this.healthBar = new HealthBar(x, y, width);
     this.time = Date.now();
   }
 
   draw() {
+    if (this.health < 30) p5.tint(255, 0, 0); // Tint red for indicating low health
     this.#drawCamera(); // draw the camera :D
     this.#drawBodyParts(); // draw the detected body parts
     this.healthBar.draw(this.health); // draw the User Interface
-  }
-
-  setHealth(arg){
-    this.health = arg;
-  }
-
-  getHealth(){
-    return this.health;
   }
 
   updatePose(poses) {
@@ -40,18 +33,18 @@ export default class Player {
     }
   }
 
-  receiveDamage(damage) {
-    if(Date.now() - this.time < 1000) return; //Stall of one second
+  takeDamage(damage) {
+    if (Date.now() - this.time < 1000) return; //Stall of one second
 
     if (this.health - damage < 0) {
+      // check that health cannot be lower than 0
       this.health = 0; // we set the minimum possible value :D
       return;
     }
+
     this.health -= damage; // we subtract the damage received
     this.time = Date.now();
   }
-
-  
 
   #drawCamera() {
     if (this.media == undefined) return;

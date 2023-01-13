@@ -14,7 +14,7 @@ export default class Pose {
   }
 
   #checkConfidence(bodyPart) {
-    return bodyPart.confidence > 0.2
+    return bodyPart.confidence > 0.15
       ? { x: bodyPart.x, y: bodyPart.y }
       : undefined;
   }
