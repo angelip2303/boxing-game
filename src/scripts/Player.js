@@ -20,9 +20,9 @@ export default class Player {
   }
 
   draw() {
-    if (this.health < 30) p5.tint(255, 0, 0); // Tint red for indicating low health
     this.#drawCamera(); // draw the camera :D
     this.#drawBodyParts(); // draw the detected body parts
+    this.#showDamage(); // show if the player is damaged
     this.healthBar.draw(this.health); // draw the User Interface
   }
 
@@ -73,5 +73,12 @@ export default class Player {
     p5.fill(color);
     p5.noStroke();
     p5.ellipse(this.x + x, this.y + y, 10, 10);
+  }
+
+  #showDamage() {
+    if (this.health < 30) {
+      p5.fill("rgba(255,0,0, 0.25)");
+      p5.rect(this.x, this.y, this.width, this.height);
+    }
   }
 }

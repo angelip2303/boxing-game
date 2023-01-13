@@ -9,7 +9,7 @@ export default class Game {
       0,
       p5.windowWidth / 2,
       p5.windowHeight,
-      state === undefined ? 28 : state.healthPlayer1
+      state === undefined ? 100 : state.healthPlayer1
     ); // leftPlayer
 
     this.player2 = new AIPlayer(
@@ -34,17 +34,25 @@ export default class Game {
 
   loop() {
     if (!this.isGameOver()) {
+      this.#show();
       this.#fight();
-    } else {
-      // show that the game is over
     }
-    this.#show();
+    // show that the game is over
+    else this.#showGameOver();
   }
 
   #show() {
     this.player1.draw(); // we draw the local player
-    p5.noTint(); // Disable tint
     this.player2.draw(); // we draw the enemy player
+  }
+
+  #showGameOver() {
+    p5.fill("rgba(0,0,0, 0.5)");
+    p5.rect(0, 0, p5.windowWidth, p5.windowHeight);
+    p5.textSize(50);
+    p5.textAlign(p5.CENTER, p5.CENTER);
+    p5.fill(255, 255, 255);
+    p5.text("Game Over!", p5.windowWidth / 2, p5.windowHeight / 2);
   }
 
   #fight() {
